@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink
-  } from 'reactstrap';
+    MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBFormInline,
+    MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
+    } from "mdbreact";
+import ReactDOM from "react-dom";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route
+} from "react-router-dom";
+import Restaurant from './pages/Restaurant'
 
 const App = (props) => {
 
@@ -19,20 +21,27 @@ const App = (props) => {
 
     return (
         <div>
-            <Navbar color="light" light expand="md">
-                <NavbarToggler onClick={toggle} />
-                <Collapse isOpen={isOpen} navbar className="container">
-                    <NavbarBrand href="/"><img src={logo} className="App-logo" alt="logo" /></NavbarBrand>
-                    <Nav className="mr-auto" navbar>
-                        <NavItem>
-                            <NavLink href="/components/">Restaurant</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="https://github.com/reactstrap/reactstrap">Favorite</NavLink>
-                        </NavItem>
-                    </Nav>
-                </Collapse>
-            </Navbar>
+            <MDBNavbar color="default-color" dark expand="md">
+                <MDBNavbarToggler onClick={toggle} />
+                <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar className="container">
+                    <MDBNavbarBrand>
+                        <img src={logo} className="App-logo" alt="logo" />
+                    </MDBNavbarBrand>
+                    <MDBNavbarNav left>
+                        <MDBNavItem>
+                            <MDBNavLink to="/">Restaurant</MDBNavLink>
+                        </MDBNavItem>
+                        <MDBNavItem>
+                            <MDBNavLink to="/favourite">Favourite</MDBNavLink>
+                        </MDBNavItem>
+                    </MDBNavbarNav>
+                </MDBCollapse>
+            </MDBNavbar>
+            <Switch>
+                <Route exact path="/">
+                    <Restaurant />
+                </Route>
+            </Switch>
         </div>
     );
 }
